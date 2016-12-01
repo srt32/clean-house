@@ -2,9 +2,9 @@
 
 A script to:
 
-* Unretweet all the tweets you've retweeted.
-* Unlike all the tweets you've liked.
 * Unfollow all the Twitter users you've followed.
+* Unlike all the tweets you've liked.
+* Unretweet all the tweets you've retweeted.
 
 ## Setup
 

@@ -96,7 +96,7 @@ func deleteFriendships(client *twitter.Client) {
 
 func main() {
 	client := newClient()
-	deleteRetweets(client, nil)
-	deleteFavorites(client, nil)
 	deleteFriendships(client)
+	deleteFavorites(client, nil)
+	deleteRetweets(client, nil)
 }
