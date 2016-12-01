@@ -8,7 +8,8 @@ A script to:
 
 ## Setup
 
-[Download your entire Twitter history][history].
+[Download your entire Twitter history][history]
+to save a backup of all your tweets.
 
 [history]: https://twitter.com/settings/account#tweet_export
 
