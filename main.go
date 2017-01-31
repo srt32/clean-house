@@ -47,7 +47,11 @@ func deleteRetweets(client *twitter.Client, maxID *int64) {
 
 		for _, tweet := range tweets {
 			if tweet.Retweeted {
-				client.Statuses.Destroy(tweet.ID, nil)
+				_, _, err := client.Statuses.Destroy(tweet.ID, nil)
+
+				if err != nil {
+					log.Fatal("Error destroying retweet", err)
+				}
 			}
 
 			newMaxID = tweet.ID
@@ -76,7 +80,10 @@ func deleteFavorites(client *twitter.Client, maxID *int64) {
 		var newMaxID int64
 
 		for _, favorite := range favorites {
-			client.Favorites.Destroy(&twitter.FavoriteDestroyParams{ID: favorite.ID})
+			_, _, err := client.Favorites.Destroy(&twitter.FavoriteDestroyParams{ID: favorite.ID})
+			if err != nil {
+				log.Fatal("Error destroying favorite", err)
+			}
 			newMaxID = favorite.ID
 		}
 
@@ -88,8 +95,13 @@ func deleteFriendships(client *twitter.Client) {
 	ids, _, err := client.Friends.IDs(&twitter.FriendIDParams{Count: 5000})
 
 	if err != nil {
-		for _, id := range ids.IDs {
-			client.Friendships.Destroy(&twitter.FriendshipDestroyParams{UserID: id})
+		log.Panic("Failed fetching friends %s", err)
+	}
+
+	for _, id := range ids.IDs {
+		_, _, err := client.Friendships.Destroy(&twitter.FriendshipDestroyParams{UserID: id})
+		if err != nil {
+			log.Fatal("Error destroying friendship", err)
 		}
 	}
 }
